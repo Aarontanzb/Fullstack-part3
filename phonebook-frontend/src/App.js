@@ -39,8 +39,13 @@ const App = () => {
             setErrorMessage(null)
           }, 5000)
         })
-    }}
-    else {
+        .catch(error => {
+          setErrorMessage(`${error.response.data.error}`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+        })
+    }} else {
       personService.create(nameObject)
         .then(returnedObject => {
           setPersons(persons.concat(returnedObject))
@@ -52,6 +57,12 @@ const App = () => {
         setNewNumber('')
         setNewSearch('')
     })
+      .catch(error => {
+        setErrorMessage(`${error.response.data.error}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
     }
   }
 
